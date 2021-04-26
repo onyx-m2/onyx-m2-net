@@ -1,35 +1,26 @@
 import path from 'path'
-import axios from 'axios'
+import { createClient } from 'contentful'
 
 export default {
   getRoutes: async () => {
-    let posts = []
-    try {
-      const { data } = await axios.get(
-        'https://jsonplaceholder.typicode.com/posts'
-      )
-      posts = data
-    }
-    catch (e) {
-      console.error(`Unable to load placeholder data`)
-      console.error(e)
-    }
-
-    return [
-      {
-        path: '/blog',
-        getData: () => ({
-          posts,
-        }),
-        children: posts.map(post => ({
-          path: `/post/${post.id}`,
-          template: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
-      },
-    ]
+    const client = createClient({
+      space: 'yjjqsazfmyk1',
+      accessToken: 's-TZE9dEAmZySMN0dxcEbchmVba-vFiERmUctn4rLcM'
+    })
+    const { items } = await client.getEntries({
+      order: 'sys.createdAt'
+    })
+    const [ { fields: { body: blog }} ] = items.filter(x => x.fields.name === 'Blog')
+    const posts = items.filter(x => x.sys.contentType.sys.id === 'blogPost')
+    return [{
+      path: '/blog',
+      getData: () => ({ blog, posts }),
+      children: posts.map(post => ({
+        path: `/post/${post.sys.id}`,
+        template: 'src/containers/Post',
+        getData: () => ({ post })
+      }))
+    }]
   },
   plugins: [
     [
