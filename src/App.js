@@ -1,5 +1,5 @@
 import React from 'react'
-import { Root, Routes, addPrefetchExcludes } from 'react-static'
+import { Root, Routes, addPrefetchExcludes, Head } from 'react-static'
 import { Container, Icon, Loader, Menu, Segment } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { Link, Router } from './components/Router'
@@ -12,8 +12,10 @@ addPrefetchExcludes(['preview'])
 function App() {
   return (
     <Root>
-
-      <NavMenu borderless inverted>
+      <Head>
+        <title>Onyx M2</title>
+      </Head>
+      <NavMenu borderless fixed='top' inverted>
         <Container text>
           <Menu.Item as={NavLink} to="/">
             <Icon name='home' /> HOME
@@ -66,7 +68,7 @@ const NavLink = props => (
 );
 
 const Content = styled.div`
-  padding-top: 1em;
+  padding-top: 4em;
   padding-bottom: 1em;
   min-height: calc(100vh - 7.75em);
 `

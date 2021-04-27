@@ -2,6 +2,9 @@ import path from 'path'
 import { createClient } from 'contentful'
 
 export default {
+
+  siteRoot: 'https://onyx-m2.net',
+
   getRoutes: async () => {
     const client = createClient({
       space: 'yjjqsazfmyk1',
@@ -22,6 +25,7 @@ export default {
       }))
     }]
   },
+
   plugins: [
     [
       require.resolve('react-static-plugin-source-filesystem'),
