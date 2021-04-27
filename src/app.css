@@ -1,20 +1,22 @@
+/* Header have to be uppercase, it's just the way it is. :) */
+h1, h2, h3, .header.item {
+  text-transform: uppercase;
+}
 
+/* Space out list more naturally. This makes items be spaced like paragraphs. */
 li {
- margin: 1em 0em;
-}
+  margin: 1em 0em;
+ }
 
-h1 {
-  text-transform: uppercase;
-  font-size: 2em;
-  margin-bottom: 0.2em;
-}
-
-h2 {
-  text-transform: uppercase;
-}
-
+/* Code samples need a slightly smaller font size to make it look right, and
+   a shaded background. */
 pre {
   font-size: 85%;
   background-color: rgb(247, 246, 243) !important;
 }
 
+/* Hate doing this kind of css, but that trailing separator on the
+   blog post small banner has to go. */
+.ui.menu .header.item::before {
+  visibility: collapse;
+}

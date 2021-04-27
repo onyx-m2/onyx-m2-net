@@ -11,13 +11,13 @@ export default function Blog() {
     <Container text>
       {documentToReactComponents(blog)}
       <Item.Group divided link>
-        {posts.map(({ sys: { id }, fields: post }) => (
+        {posts.map(({ sys: { id }, fields }) => (
           <Item key={id} as={Link} to={`/blog/post/${id}/`}>
-            <Item.Image size='small' src={blogImageUrl(post.thumbnail, { thumbnail: true})} />
+            <Item.Image size='small' src={blogImageUrl(fields.thumbnail, { thumbnail: true})} />
             <Item.Content>
-              <Item.Header as='h2' content={post.title} />
-              <Item.Extra content={formatDate(post.postedOn)} />
-              <Item.Description content={post.synopsis} />
+              <Item.Header as='h2' content={fields.title} />
+              <Item.Extra content={formatDate(fields.postedOn)} />
+              <Item.Description content={fields.synopsis} />
             </Item.Content>
           </Item>
         ))}
