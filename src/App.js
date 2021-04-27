@@ -14,6 +14,7 @@ function App() {
     <Root>
       <Head>
         <title>Onyx M2</title>
+        <meta name='google-site-verification' content='bec0McKsxEc8t_rsbvfndxeDxxpJLosxXwSszP_JGgI' />
       </Head>
       <NavMenu borderless fixed='top' inverted>
         <Container text>
