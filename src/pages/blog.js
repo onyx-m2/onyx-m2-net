@@ -3,7 +3,7 @@ import { useRouteData } from 'react-static'
 import { Link } from 'components/Router'
 import { Item, Container } from 'semantic-ui-react'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { formatDate, blogImageUrl } from '../utils'
+import { formatDate, blogImageUrl, toUri } from '../utils'
 
 export default function Blog() {
   const { blog, posts } = useRouteData()
@@ -12,7 +12,7 @@ export default function Blog() {
       {documentToReactComponents(blog)}
       <Item.Group divided link>
         {posts.map(({ sys: { id }, fields }) => (
-          <Item key={id} as={Link} to={`/blog/post/${id}/`}>
+          <Item key={id} as={Link} to={`/blog/post/${toUri(fields.title)}/`}>
             <Item.Image size='small' src={blogImageUrl(fields.thumbnail, { thumbnail: true})} />
             <Item.Content>
               <Item.Header as='h2' content={fields.title} />

@@ -1,14 +1,17 @@
 import path from 'path'
 import { createClient } from 'contentful'
+import { toUri } from './src/utils'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export default {
 
-  siteRoot: 'https://onyx-m2.net',
+  siteRoot: process.env.SITE_ROOT,
 
   getRoutes: async () => {
     const client = createClient({
-      space: 'yjjqsazfmyk1',
-      accessToken: 's-TZE9dEAmZySMN0dxcEbchmVba-vFiERmUctn4rLcM'
+      space: process.env.CONTENTFUL_SPACE,
+      accessToken: process.env.CONTENTFUL_TOKEN
     })
     const { items } = await client.getEntries({
       order: 'sys.createdAt'
@@ -19,7 +22,7 @@ export default {
       path: '/blog',
       getData: () => ({ blog, posts }),
       children: posts.map(post => ({
-        path: `/post/${post.sys.id}`,
+        path: `/post/${toUri(post.fields.title)}`,
         template: 'src/containers/Post',
         getData: () => ({ post })
       }))
@@ -27,13 +30,11 @@ export default {
   },
 
   plugins: [
-    [
-      require.resolve('react-static-plugin-source-filesystem'),
-      {
-        location: path.resolve('./src/pages'),
-      },
+    [ require.resolve('react-static-plugin-source-filesystem'),
+      { location: path.resolve('./src/pages') }
     ],
     require.resolve('react-static-plugin-reach-router'),
     require.resolve('react-static-plugin-sitemap'),
+    require.resolve('@elbstack/react-static-plugin-dotenv')
   ],
 }

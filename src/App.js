@@ -1,15 +1,26 @@
-import React from 'react'
-import { Root, Routes, addPrefetchExcludes, Head } from 'react-static'
+import React, { useEffect } from 'react'
+import { Root, Routes, addPrefetchExcludes, Head, useLocation } from 'react-static'
 import { Container, Icon, Loader, Menu, Segment } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { Link, Router } from './components/Router'
 import Preview from './containers/Preview'
+import GoogleAnalytics from 'react-ga'
 import './app.css'
 
-// None static routes need to be declared here
+// Non-static routes need to be declared here
 addPrefetchExcludes(['preview'])
 
+GoogleAnalytics.initialize(process.env.UA_ID)
+
 function App() {
+
+  // send off pageview event when the location changes as the user navigates the site,
+  // and note that going 'back' won't trigger an event
+  const location = useLocation();
+  useEffect(() => {
+    GoogleAnalytics.pageview(location?.pathname || window.location.pathname)
+  }, [location?.pathname])
+
   return (
     <Root>
       <Head>

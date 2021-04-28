@@ -42,3 +42,7 @@ export function blogImageUrl(asset, options) {
   }
   return fileUrl
 }
+
+export function toUri(text) {
+  return encodeURIComponent(text.toLowerCase().replace(/\s/g, '-'))
+}
