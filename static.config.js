@@ -11,7 +11,7 @@ export default {
   getRoutes: async () => {
     const client = createClient({
       space: process.env.CONTENTFUL_SPACE,
-      accessToken: process.env.CONTENTFUL_TOKEN
+      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN
     })
     const { items } = await client.getEntries({
       order: 'sys.createdAt'
@@ -35,6 +35,5 @@ export default {
     ],
     require.resolve('react-static-plugin-reach-router'),
     require.resolve('react-static-plugin-sitemap'),
-    require.resolve('@elbstack/react-static-plugin-dotenv')
   ],
 }

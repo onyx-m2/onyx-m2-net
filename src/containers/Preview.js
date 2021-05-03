@@ -5,8 +5,8 @@ import { Loader } from 'semantic-ui-react'
 
 const client = createClient({
   host: 'preview.contentful.com',
-  space: 'yjjqsazfmyk1',
-  accessToken: '4ab5SHy2UIK_qoWH7djEoTgS2UvwKSH0Mm_d3k258Mo'
+  space: process.env.CONTENTFUL_SPACE,
+  accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN
 })
 
 export default () => {
