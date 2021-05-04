@@ -17,7 +17,10 @@ export default {
       order: 'sys.createdAt'
     })
     const [ { fields: { body: blog }} ] = items.filter(x => x.fields.name === 'Blog')
-    const posts = items.filter(x => x.sys.contentType.sys.id === 'blogPost')
+    const posts = items
+      .filter(x => x.sys.contentType.sys.id === 'blogPost')
+      .sort((x, y) => Date.parse(x.fields.postedOn) > Date.parse(y.fields.postedOn) ? 1 : -1)
+
     return [{
       path: '/blog',
       getData: () => ({ blog, posts }),
