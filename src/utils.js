@@ -12,10 +12,10 @@ export function formatDate(text) {
 }
 
 export function blogImageWidth(asset) {
-  if (asset.metadata.tags.some(x => x.sys.id === 'blogImageFullWidth')) {
+  if (asset.metadata.tags.some(x => x.sys.id === 'imageFullWidth')) {
     return BLOG_IMAGE_FULL_WIDTH
   }
-  else if (asset.metadata.tags.some(x => x.sys.id === 'blogImageHalfWidth')) {
+  else if (asset.metadata.tags.some(x => x.sys.id === 'imageHalfWidth')) {
     return BLOG_IMAGE_HALF_WIDTH
   }
   return asset.fields.file.details.image.width

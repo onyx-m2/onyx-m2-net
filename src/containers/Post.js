@@ -15,9 +15,9 @@ const richTextOptions = {
 
     // render image assets
     [BLOCKS.EMBEDDED_ASSET]: ({ data: { target }}) =>
-      <PostImage imageWidth={blogImageWidth(target)} rightPositioned={hasTag(target, 'blogImageRightPositioned')}>
+      <PostImage imageWidth={blogImageWidth(target)} rightPositioned={hasTag(target, 'imageRightPositioned')}>
         <Image fluid src={blogImageUrl(target)} alt={target.fields.title} />
-        {hasTag(target, 'blogImageCaptioned') &&
+        {hasTag(target, 'imageCaptioned') &&
         <PostImageCaption>{target.fields.title}</PostImageCaption>
         }
       </PostImage>,
